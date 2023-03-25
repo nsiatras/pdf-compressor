@@ -273,12 +273,24 @@ public class frmMain extends javax.swing.JFrame
 
     public void UpdateCompressedSizeOfFile(final PDFFile f)
     {
-        jTable1.repaint();
-        
-        fCompressedFilesCount += 1;
-        jProgressBarCompression.setValue(fCompressedFilesCount);
-        jProgressBarCompression.invalidate();
-        jProgressBarCompression.repaint();
+        try
+        {
+            jTable1.repaint();
+
+            fCompressedFilesCount += 1;
+            jProgressBarCompression.setValue(fCompressedFilesCount);
+            jProgressBarCompression.invalidate();
+            jProgressBarCompression.repaint();
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+
+    public void CompressionFinished()
+    {
+        jButtonCompressFiles.setText("Compress Files");
     }
 
     public static void main(String args[])

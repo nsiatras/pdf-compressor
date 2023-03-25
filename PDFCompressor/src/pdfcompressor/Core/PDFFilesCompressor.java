@@ -1,6 +1,9 @@
 package pdfcompressor.Core;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import pdfcompressor.UI.frmMain;
 
@@ -25,7 +28,7 @@ public class PDFFilesCompressor
 
         try
         {
-            fGhostScriptPath = new File(".").getCanonicalPath() + File.separator + "Prerequisites" + File.separator + "gswin32c.exe";
+            fGhostScriptPath = new File(".").getCanonicalPath() + File.separator + "Prerequisites" + File.separator + "gswin64c.exe";
         }
         catch (Exception ex)
         {
@@ -52,22 +55,56 @@ public class PDFFilesCompressor
                 {
                     Process p = Runtime.getRuntime().exec(command);
                     int exitVal = p.waitFor();
-                    if (exitVal == 0)
-                    {
-                        File f = new File(outputPath);
-                        pdf.setCompressedSize(f.length());
 
-                        // The PDF File has been compressed.
-                        // Inform frmMain to display the compressed size of the
-                        // file on the appropriate Table.
-                        frmMain.fActiveInstance.UpdateCompressedSizeOfFile(pdf);
+                    File compressedFile = new File(outputPath);
+
+                    // If for some reason the compressed file doesn't exist
+                    // then copy the original to the output path.
+                    if (!compressedFile.exists())
+                    {
+                        CopyFile(pdf.getPhysicalFile().getAbsolutePath(), outputPath);
                     }
+
+                    // If the compressed file size is greater than the original
+                    // then use the original
+                    if (compressedFile.length() > pdf.getPhysicalFile().length())
+                    {
+                        CopyFile(pdf.getPhysicalFile().getAbsolutePath(), outputPath);
+                        pdf.setCompressedSize(pdf.getPhysicalFile().length());
+                    }
+                    else
+                    {
+                        pdf.setCompressedSize(compressedFile.length());
+                    }
+
+                    // The PDF File has been compressed.
+                    // Inform frmMain to display the compressed size of the
+                    // file on the appropriate Table.
+                    frmMain.fActiveInstance.UpdateCompressedSizeOfFile(pdf);
+
+                    p.destroy();
+                    p = null;
                 }
                 catch (Exception ex)
                 {
 
                 }
             }
+        }
+
+        // Inform frmMain that the compression is now finished!
+        frmMain.fActiveInstance.CompressionFinished();
+    }
+
+    private void CopyFile(String from, String to)
+    {
+        try
+        {
+            Files.copy(Path.of(from), Path.of(to), StandardCopyOption.REPLACE_EXISTING);
+        }
+        catch (Exception ex)
+        {
+
         }
     }
 
