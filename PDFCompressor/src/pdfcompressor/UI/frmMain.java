@@ -7,6 +7,7 @@ package pdfcompressor.UI;
 import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import pdfcompressor.Core.FileScanner;
 import pdfcompressor.Core.PDFFile;
@@ -34,7 +35,7 @@ public class frmMain extends javax.swing.JFrame
 
         this.setLocationRelativeTo(null);
 
-        jTable1.setModel(new PDFTableModel(new ArrayList<PDFFile>()));
+        jTableFiles.setModel(new PDFTableModel(new ArrayList<PDFFile>()));
     }
 
     @SuppressWarnings("unchecked")
@@ -43,7 +44,7 @@ public class frmMain extends javax.swing.JFrame
     {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableFiles = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
         jButtonAddFolder = new javax.swing.JButton();
         jButtonAddFile = new javax.swing.JButton();
@@ -59,8 +60,8 @@ public class frmMain extends javax.swing.JFrame
         setTitle("PDF Compressor");
         setResizable(false);
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableFiles.setAutoCreateRowSorter(true);
+        jTableFiles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null},
@@ -73,7 +74,7 @@ public class frmMain extends javax.swing.JFrame
                 "Column 1"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableFiles);
 
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
@@ -217,7 +218,7 @@ public class frmMain extends javax.swing.JFrame
                 fSelectedPDFFiles.add(new PDFFile(pdf));
             }
 
-            jTable1.setModel(new PDFTableModel(new ArrayList<PDFFile>(fSelectedPDFFiles)));
+            jTableFiles.setModel(new PDFTableModel(new ArrayList<PDFFile>(fSelectedPDFFiles)));
 
         }
         else
@@ -271,11 +272,11 @@ public class frmMain extends javax.swing.JFrame
 
     }//GEN-LAST:event_jButtonCompressFilesActionPerformed
 
-    public void UpdateCompressedSizeOfFile(final PDFFile f)
+    public void FileCompressionFinished(final PDFFile f)
     {
         try
         {
-            jTable1.repaint();
+            jTableFiles.repaint();
 
             fCompressedFilesCount += 1;
             jProgressBarCompression.setValue(fCompressedFilesCount);
@@ -288,9 +289,15 @@ public class frmMain extends javax.swing.JFrame
         }
     }
 
+    public void UpdateJTableFiles()
+    {
+        jTableFiles.repaint();
+    }
+
     public void CompressionFinished()
     {
         jButtonCompressFiles.setText("Compress Files");
+        JOptionPane.showMessageDialog(this, String.valueOf(fCompressedFilesCount) + " files compressed!", "Compression Finished", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static void main(String args[])
@@ -321,7 +328,7 @@ public class frmMain extends javax.swing.JFrame
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBarCompression;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableFiles;
     private javax.swing.JTextField jTextFieldOutputDirectory;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables

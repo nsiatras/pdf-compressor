@@ -10,8 +10,8 @@ public class PDFFile
 {
 
     private File fPhysicalFile;
-
     private long fCompressedSize = 0;
+    private String fMessage = null;
 
     public PDFFile(File physicalFile)
     {
@@ -41,6 +41,16 @@ public class PDFFile
     public double getCompressedSize()
     {
         return fCompressedSize / 1024;
+    }
+
+    public void setMessage(String message)
+    {
+        fMessage = message;
+    }
+
+    public String getMessage()
+    {
+        return fMessage;
     }
 
 }

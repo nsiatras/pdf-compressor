@@ -16,9 +16,7 @@ public class PDFFilesCompressor
 
     private final ArrayList<PDFFile> fFiles;
     private final String fOutputDirectoryPath;
-
     private boolean fKeepRunning = false;
-
     private String fGhostScriptPath = "";
 
     public PDFFilesCompressor(ArrayList<PDFFile> files, String outputDirectoryPath)
@@ -44,6 +42,9 @@ public class PDFFilesCompressor
         {
             if (fKeepRunning)
             {
+                pdf.setMessage("Compressing...");
+                frmMain.fActiveInstance.UpdateJTableFiles();
+
                 final String outputPath = fOutputDirectoryPath + "\\" + pdf.getFileName();
 
                 String command = fGhostScriptPath;
@@ -80,14 +81,14 @@ public class PDFFilesCompressor
                     // The PDF File has been compressed.
                     // Inform frmMain to display the compressed size of the
                     // file on the appropriate Table.
-                    frmMain.fActiveInstance.UpdateCompressedSizeOfFile(pdf);
+                    frmMain.fActiveInstance.FileCompressionFinished(pdf);
 
                     p.destroy();
                     p = null;
                 }
                 catch (Exception ex)
                 {
-
+                    pdf.setMessage("Error: Cannot compress file!");
                 }
             }
         }

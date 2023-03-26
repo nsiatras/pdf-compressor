@@ -1,6 +1,5 @@
 package pdfcompressor.UI.TableModels;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -15,12 +14,10 @@ public class PDFTableModel extends AbstractTableModel
 
     private final List<PDFFile> fItems;
     private final int fColumnsCount = 3;
-    private final DecimalFormat f2DigitsDecimalFormat = new DecimalFormat("#.##");
 
     public PDFTableModel()
     {
         fItems = new ArrayList<>();
-        f2DigitsDecimalFormat.setMaximumFractionDigits(2);
     }
 
     public PDFTableModel(List<PDFFile> items)
@@ -78,7 +75,7 @@ public class PDFTableModel extends AbstractTableModel
             case 1:
                 return "Size (Kb)";
             case 2:
-                return "Compressed Size (Kb)";
+                return "Status";
 
         }
         return null;
@@ -88,15 +85,32 @@ public class PDFTableModel extends AbstractTableModel
     public Object getValueAt(int rowIndex, int columnIndex)
     {
         PDFFile item = fItems.get(rowIndex);
+
         switch (columnIndex)
         {
             case 0:
                 return item.getFileName();
-            case 1:
-                return Double.valueOf(f2DigitsDecimalFormat.format(item.getSizeKb()));
-            case 2:
-                return item.getCompressedSize() > 0 ? Double.valueOf(f2DigitsDecimalFormat.format(item.getCompressedSize())) : "";
 
+            case 1:
+                return String.valueOf(item.getSizeKb());
+
+            case 2:
+
+                if (item.getCompressedSize() > 0)
+                {
+                    return String.valueOf(item.getCompressedSize());
+                }
+                else
+                {
+                    if (item.getMessage() != null)
+                    {
+                        return item.getMessage();
+                    }
+                    else
+                    {
+
+                    }
+                }
         }
         return null;
     }
