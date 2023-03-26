@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>true</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>PDFCompressor.jar</jar>
+  <outfile>C:\Development\pdf-compressor\NetBeansProject\00_Release\PDFCompressor.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>https://www.java.com/en/download/</downloadUrl>
+  <supportUrl>https://github.com/nsiatras</supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>C:\Development\pdf-compressor\Launch4J\AppIcon.ico</icon>
+  <jre>
+    <path>jre</path>
+    <requiresJdk>false</requiresJdk>
+    <requires64Bit>false</requires64Bit>
+    <minVersion>1.0.8</minVersion>
+    <maxVersion></maxVersion>
+  </jre>
+  <versionInfo>
+    <fileVersion>1.1.1.0</fileVersion>
+    <txtFileVersion>1.1.1</txtFileVersion>
+    <fileDescription>PDFCompressor</fileDescription>
+    <copyright>Nikolaos Siatras</copyright>
+    <productVersion>1.1.1.0</productVersion>
+    <txtProductVersion>1.1.1</txtProductVersion>
+    <productName>PDFCompressor</productName>
+    <companyName>Nikolaos Siatras</companyName>
+    <internalName>Nikolaos Siatras</internalName>
+    <originalFilename>PDFCompressor.exe</originalFilename>
+    <trademarks></trademarks>
+    <language>ENGLISH_US</language>
+  </versionInfo>
+</launch4jConfig>
