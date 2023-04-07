@@ -8,3 +8,9 @@ Most of the software I found googling was full of bloatware or didn't work prope
 <center>
 <img src="https://github.com/nsiatras/pdf-compressor/blob/main/Images/main-screen.png" alt="PDF Compressor">
 </center>
+
+
+## How it works
+
+[![Rabbit Miner - Cryptocurrency Cluster Miner](https://img.youtube.com/vi/oNTjcRy_eyw/0.jpg)](https://www.youtube.com/watch?v=oNTjcRy_eyw)
+<br>Video URL: https://www.youtube.com/watch?v=oNTjcRy_eyw
