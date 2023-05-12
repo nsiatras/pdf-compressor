@@ -3,7 +3,7 @@
 
 #define MyAppName "PDFCompressor"
 #define MyAppVersion "1.0"
-#define MyAppPublisher "PDFCompressor"
+#define MyAppPublisher "Nikolaos Siatras"
 #define MyAppURL "https://github.com/nsiatras"
 #define MyAppExeName "PDFCompressor.exe"
 #define MyAppAssocName MyAppName + " File"
@@ -23,7 +23,7 @@ AppUpdatesURL           = {#MyAppURL}
 ; Αυτό αλλάζει το εικονίδιο του uninstaller μέσα στo Add-Remove Programs των Windows
 UninstallDisplayIcon     = C:\Development\pdf-compressor\Launch4J\AppIcon.ico
 
-DefaultDirName          = {pf64}\NikolaosSiatras\{#MyAppName}
+DefaultDirName          = {pf64}\Nikolaos Siatras\{#MyAppName}
 ChangesAssociations     = yes
 DisableProgramGroupPage = true
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
