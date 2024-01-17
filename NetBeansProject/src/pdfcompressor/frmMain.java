@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
-import pdfcompressor.Core.FileScanner;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import pdfcompressor.Core.PDFFile;
 import pdfcompressor.Core.PDFFilesCompressor;
 import pdfcompressor.Settings.AppSettings;
@@ -54,11 +54,9 @@ public class frmMain extends javax.swing.JFrame
         jProgressBarCompression = new javax.swing.JProgressBar();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jTextFieldInputDirectory = new javax.swing.JTextField();
-        jButtonSelectInputDirectory = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableFiles = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -127,19 +125,6 @@ public class frmMain extends javax.swing.JFrame
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Step 1 - Choose PDFs Directory", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(0, 102, 204))); // NOI18N
 
-        jLabel3.setText("Directory:");
-
-        jTextFieldInputDirectory.setEditable(false);
-
-        jButtonSelectInputDirectory.setText("...");
-        jButtonSelectInputDirectory.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                jButtonSelectInputDirectoryActionPerformed(evt);
-            }
-        });
-
         jTableFiles.setAutoCreateRowSorter(true);
         jTableFiles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
@@ -156,6 +141,15 @@ public class frmMain extends javax.swing.JFrame
         ));
         jScrollPane1.setViewportView(jTableFiles);
 
+        jButton1.setText("Load PDF Files");
+        jButton1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -163,25 +157,19 @@ public class frmMain extends javax.swing.JFrame
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldInputDirectory, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonSelectInputDirectory))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE))
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextFieldInputDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonSelectInputDirectory))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                .addComponent(jButton1)
                 .addContainerGap())
         );
 
@@ -282,11 +270,6 @@ public class frmMain extends javax.swing.JFrame
                 JOptionPane.showMessageDialog(this, "Please select the output directory", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            else if (jTextFieldOutputDirectory.getText().equals(jTextFieldInputDirectory.getText()))
-            {
-                JOptionPane.showMessageDialog(this, "Output directory cannot be the same with the input directory.\nPlease choose an other output directory!", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
 
             fCompressFilesThread = new Thread(() ->
             {
@@ -313,35 +296,6 @@ public class frmMain extends javax.swing.JFrame
 
     }//GEN-LAST:event_jButtonCompressFilesActionPerformed
 
-    private void jButtonSelectInputDirectoryActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSelectInputDirectoryActionPerformed
-    {//GEN-HEADEREND:event_jButtonSelectInputDirectoryActionPerformed
-        JFileChooser chooser = new JFileChooser();
-        chooser.setCurrentDirectory(new java.io.File("."));
-        chooser.setDialogTitle("Select Directory");
-        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        chooser.setAcceptAllFileFilterUsed(false);
-        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
-        {
-            jTextFieldInputDirectory.setText(chooser.getSelectedFile().getAbsolutePath());
-
-            FileScanner scanner = new FileScanner(chooser.getSelectedFile());
-            ArrayList<File> pdfFiles = scanner.getFiles(".pdf");
-
-            // Create a PDFFile object for each file inside the pdfFiles list
-            // and add it to fSelectedPDFFiles.
-            for (File pdf : pdfFiles)
-            {
-                fSelectedPDFFiles.add(new PDFFile(pdf));
-            }
-
-            jTableFiles.setModel(new PDFTableModel(new ArrayList<PDFFile>(fSelectedPDFFiles)));
-        }
-        else
-        {
-
-        }
-    }//GEN-LAST:event_jButtonSelectInputDirectoryActionPerformed
-
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jLabel6MouseClicked
     {//GEN-HEADEREND:event_jLabel6MouseClicked
         try
@@ -353,6 +307,47 @@ public class frmMain extends javax.swing.JFrame
 
         }
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
+    {//GEN-HEADEREND:event_jButton1ActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new java.io.File("."));
+        chooser.setDialogTitle("Select Directory");
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.setMultiSelectionEnabled(true);
+        chooser.setFileFilter(new FileNameExtensionFilter("DXF Files", "pdf"));
+
+        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
+        {
+            File[] selectedPDFFiles = chooser.getSelectedFiles();
+
+            // Create a PDFFile object for each file inside the pdfFiles list
+            // and add it to fSelectedPDFFiles.
+            for (File pdf : selectedPDFFiles)
+            {
+                boolean exists = false;
+                for (PDFFile f : fSelectedPDFFiles)
+                {
+                    if (f.getPhysicalFile().getAbsolutePath().equals(pdf.getAbsolutePath()))
+                    {
+                        exists = true;
+                        break;
+                    }
+                }
+
+                if (!exists)
+                {
+                    fSelectedPDFFiles.add(new PDFFile(pdf));
+                }
+            }
+
+            jTableFiles.setModel(new PDFTableModel(new ArrayList<PDFFile>(fSelectedPDFFiles)));
+        }
+        else
+        {
+
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void FileCompressionFinished(final PDFFile f)
     {
@@ -401,12 +396,11 @@ public class frmMain extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCompressFiles;
-    private javax.swing.JButton jButtonSelectInputDirectory;
     private javax.swing.JButton jButtonSelectOutputDirectory;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -415,7 +409,6 @@ public class frmMain extends javax.swing.JFrame
     private javax.swing.JProgressBar jProgressBarCompression;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableFiles;
-    private javax.swing.JTextField jTextFieldInputDirectory;
     private javax.swing.JTextField jTextFieldOutputDirectory;
     // End of variables declaration//GEN-END:variables
 }

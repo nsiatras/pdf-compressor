@@ -7,5 +7,5 @@ package pdfcompressor.Settings;
 public class AppSettings
 {
 
-    public static final String fVersion = "1.0";
+    public static final String fVersion = "2.0";
 }

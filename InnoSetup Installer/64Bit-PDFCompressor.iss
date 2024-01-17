@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "PDFCompressor"
-#define MyAppVersion "1.0"
+#define MyAppVersion "2.0"
 #define MyAppPublisher "Nikolaos Siatras"
 #define MyAppURL "https://github.com/nsiatras"
 #define MyAppExeName "PDFCompressor.exe"
