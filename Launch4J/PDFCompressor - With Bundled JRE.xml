@@ -10,14 +10,17 @@
   <priority>normal</priority>
   <downloadUrl>https://www.java.com/en/download/</downloadUrl>
   <supportUrl>https://github.com/nsiatras</supportUrl>
-  <stayAlive>false</stayAlive>
+  <stayAlive>true</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
   <icon>C:\Development\pdf-compressor\Launch4J\AppIcon.ico</icon>
+  <classPath>
+    <mainClass>pdfcompressor.frmMain</mainClass>
+  </classPath>
   <jre>
     <path>jre</path>
     <requiresJdk>false</requiresJdk>
-    <requires64Bit>false</requires64Bit>
+    <requires64Bit>true</requires64Bit>
     <minVersion>1.0.8</minVersion>
     <maxVersion></maxVersion>
   </jre>

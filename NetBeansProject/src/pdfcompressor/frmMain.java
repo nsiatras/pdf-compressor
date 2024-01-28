@@ -315,7 +315,7 @@ public class frmMain extends javax.swing.JFrame
         chooser.setDialogTitle("Select Directory");
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         chooser.setMultiSelectionEnabled(true);
-        chooser.setFileFilter(new FileNameExtensionFilter("DXF Files", "pdf"));
+        chooser.setFileFilter(new FileNameExtensionFilter(".PDF Files", "pdf"));
 
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
         {
@@ -341,7 +341,7 @@ public class frmMain extends javax.swing.JFrame
                 }
             }
 
-            jTableFiles.setModel(new PDFTableModel(new ArrayList<PDFFile>(fSelectedPDFFiles)));
+            jTableFiles.setModel(new PDFTableModel(new ArrayList<>(fSelectedPDFFiles)));
         }
         else
         {

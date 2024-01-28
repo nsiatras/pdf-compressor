@@ -2,13 +2,14 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "PDFCompressor"
-#define MyAppVersion "2.0"
+#define MyAppVersion "2.1"
 #define MyAppPublisher "Nikolaos Siatras"
 #define MyAppURL "https://github.com/nsiatras"
 #define MyAppExeName "PDFCompressor.exe"
 #define MyAppAssocName MyAppName + " File"
 
 [Setup]
+SignTool = WinSignTool
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new {C61283DD-5DB8-4B7D-9BA8-5645C97327E6}, click Tools | Generate GUID inside the IDE.)
 AppId                   = {{C61283DD-5DB8-4B7D-9BA8-5645C97327E6}
@@ -41,7 +42,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "C:\Development\pdf-compressor\NetBeansProject\00_Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Development\pdf-compressor\NetBeansProject\00_Release\PDFCompressor.jar"; DestDir: "{app}"; Flags: ignoreversion
+;Source: "C:\Development\pdf-compressor\NetBeansProject\00_Release\PDFCompressor.jar"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Development\pdf-compressor\NetBeansProject\00_Release\jre\*"; DestDir: "{app}\jre"; Flags: ignoreversion recursesubdirs
 Source: "C:\Development\pdf-compressor\NetBeansProject\00_Release\Prerequisites\*"; DestDir: "{app}\Prerequisites"; Flags: ignoreversion recursesubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
