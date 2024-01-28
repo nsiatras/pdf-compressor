@@ -25,20 +25,15 @@
         <delete dir="${store.dir}"/>
         <mkdir dir="${store.dir}"/>
        
-        <!-- Για να κάνει copy το Bundled JRE στο directory 00-Release-Fat-Jar -->
-        <copy todir="${store.dir}/jre">
-            <fileset dir="BundledJRE"/>
-        </copy>
-
+        <!-- Κάνει Unzip το jre.zip στο /jre του Build  -->
+        <unzip src="BundledJRE/jre.zip" dest="${store.dir}/jre"/>
+        
         <!-- Για να κάνει copy το Prerequisites στο directory 00-Release-Fat-Jar -->
         <copy todir="${store.dir}/Prerequisites">
             <fileset dir="Prerequisites"/>
         </copy>
-        
-        <copy tofile="${store.dir}/PDFCompressor.exe">
-            <fileset file="C:/Development/pdf-compressor/Launch4J/PDFCompressor.exe"/>
-        </copy>
-        
+         
+        <!-- Φτιάξε το Fat Jar-->
         <jar destfile="${store.dir}/temp_final.jar" filesetmanifest="skip">
             <zipgroupfileset dir="dist" includes="*.jar"/>
             <!--<zipgroupfileset dir="dist/lib" includes="*.jar"/>-->
@@ -50,5 +45,25 @@
             <zipfileset src="${store.dir}/temp_final.jar" excludes="META-INF/*.SF, META-INF/*.DSA, META-INF/*.RSA"/>
         </zip>
         <delete file="${store.dir}/temp_final.jar"/>
+        
+        <!-- Τρέχω το launch4j για να κάνει το exe  -->
+        <exec executable="C:\Program Files (x86)\Launch4j\launch4j.exe">
+            <arg value="C:\Development\pdf-compressor\Launch4J\PDFCompressor - With Bundled JRE.xml"/>
+        </exec>
+        
+        <!-- Sign the exe-->
+        <exec executable="C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x86\signtool.exe">
+            <arg value="sign"/>
+            <arg value="/tr"/>
+            <arg value="http://timestamp.digicert.com"/>
+            <arg value="/td"/>
+            <arg value="sha256"/>
+            <arg value="/fd"/>
+            <arg value="sha256"/>
+            <arg value="/a"/>
+            <arg value="C:\Development\pdf-compressor\NetBeansProject\00_Release\PDFCompressor.exe"/>
+        </exec>
+
+      
     </target>
 </project>

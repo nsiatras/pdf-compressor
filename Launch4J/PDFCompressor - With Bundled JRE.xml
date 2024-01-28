@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch4jConfig>
-  <dontWrapJar>true</dontWrapJar>
+  <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>PDFCompressor.jar</jar>
+  <jar>C:\Development\pdf-compressor\NetBeansProject\00_Release\PDFCompressor.jar</jar>
   <outfile>C:\Development\pdf-compressor\NetBeansProject\00_Release\PDFCompressor.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
