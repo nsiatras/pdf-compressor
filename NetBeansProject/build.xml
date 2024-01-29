@@ -64,7 +64,7 @@
         <waitfor maxwait="30" maxwaitunit="second">
             <available file="${store.dir}/PDFCompressor.exe"/>
         </waitfor>
-        <delete file="${store.jar}"/>
+       
         
 
         <!-- Sign the exe-->
