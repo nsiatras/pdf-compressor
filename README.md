@@ -11,5 +11,5 @@ Most of the software I found googling was full of bloatware or didn't work prope
 
 ## How it works
 
-[![Rabbit Miner - Cryptocurrency Cluster Miner](https://img.youtube.com/vi/oNTjcRy_eyw/0.jpg)](https://www.youtube.com/watch?v=oNTjcRy_eyw)
+[![PDF Compressor](https://img.youtube.com/vi/oNTjcRy_eyw/0.jpg)](https://www.youtube.com/watch?v=oNTjcRy_eyw)
 <br>Video URL: https://www.youtube.com/watch?v=oNTjcRy_eyw
